@@ -6,11 +6,13 @@ import { DebugComponent } from './debug/debug.component';
 import { ForwardComponent } from './forward/forward.component';
 import { RefreshComponent } from './refresh/refresh.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { GoHomeComponent } from "./go-home/go-home.component";
+import { BrowserService } from './browser.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatToolbarModule, AddressComponent, BackwardComponent, DebugComponent, ForwardComponent, RefreshComponent],
+  imports: [RouterOutlet, MatToolbarModule, AddressComponent, BackwardComponent, DebugComponent, ForwardComponent, RefreshComponent, GoHomeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

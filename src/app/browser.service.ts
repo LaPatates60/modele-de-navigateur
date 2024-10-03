@@ -4,10 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class BrowserService {
-
   url = 'https://amiens.unilasalle.fr';
-  canGoBack = false;
-  canGoForward = false;
+  canGoBack = true;
+  canGoForward = true;
 
 // @ts-ignore
   electronAPI = window.electronAPI;
@@ -26,11 +25,17 @@ export class BrowserService {
     this.updateHistory();
   }
 
+  goHome() {
+    this.url = 'https://amiens.unilasalle.fr'
+    this.electronAPI.goToPage(this.url);
+  }
+
   refresh() {
     this.electronAPI.refresh();
   }
 
   goToPage(url: string) {
+    //this.electronAPI.goToPage(this.validateAndCorrectUrl(url))
     this.electronAPI.goToPage(url)
       .then(() => this.updateHistory());
   }
@@ -50,5 +55,15 @@ export class BrowserService {
 
     this.electronAPI.canGoForward()
       .then((canGoForward : boolean) => this.canGoForward = canGoForward);
+  }
+
+  validateAndCorrectUrl(url: string) {
+    
+    if(!/^https?:\/\//i.test(url)) {
+
+      
+      return `http://${url}`;
+    }
+    return url;
   }
 }
